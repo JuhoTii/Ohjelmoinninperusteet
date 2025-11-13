@@ -19,6 +19,7 @@ Sähköposti: anna.virtanen@example.com
 
 from datetime import datetime
 
+
 def main():
     varaukset = "varaukset.txt"
 
@@ -40,7 +41,7 @@ def main():
     tuntihinta = float(varaus[5])
     maksettu = varaus[6].lower() == "true"
     kohde = varaus[7]
-    puhelin = varaus[8]
+    puhelin = int(varaus[8])
     sahkoposti = varaus[9]
 
     # Tulostus
@@ -54,6 +55,7 @@ def main():
     print(f"Kohde: {kohde}")
     print(f"Puhelin: {puhelin}")
     print(f"Sähköposti: {sahkoposti}")
+
 
 if __name__ == "__main__":
     main()
