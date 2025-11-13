@@ -16,29 +16,44 @@ Sähköposti: anna.virtanen@example.com
 
 """
 
+
+from datetime import datetime
+
 def main():
-    # Määritellään tiedoston nimi suoraan koodissa
     varaukset = "varaukset.txt"
 
-    # Avataan tiedosto ja luetaan sisältö
     with open(varaukset, "r", encoding="utf-8") as f:
-        varaus = f.read().strip()
+        varaus = f.read().strip().split('|')
 
-    # Tulostetaan varaus konsoliin
-    print(varaus)
+    # Muunnokset
+    varausnumero = int(varaus[0])
+    varaaja = varaus[1]
 
-    # Kokeile näitä
-    #print(varaus.split('|'))
-    #varausId = varaus.split('|')[0]
-    #print(varausId)
-    #print(type(varausId))
-    """
-    Edellisen olisi pitänyt tulostaa numeron 123, joka
-    on oletuksena tekstiä.
+    # Päivämäärä ja aika
+    paiva = datetime.strptime(varaus[2], "%Y-%m-%d").date()
+    suomalainenPaiva = paiva.strftime("%d.%m.%Y")
 
-    Voit kokeilla myös vaihtaa kohdan [0] esim. seuraavaksi [1]
-    ja testata mikä muuttuu
-    """
+    aika = datetime.strptime(varaus[3], "%H:%M").time()
+    suomalainenAika = aika.strftime("%H.%M")
+
+    tuntimaara = int(varaus[4])
+    tuntihinta = float(varaus[5])
+    maksettu = varaus[6].lower() == "true"
+    kohde = varaus[7]
+    puhelin = varaus[8]
+    sahkoposti = varaus[9]
+
+    # Tulostus
+    print(f"Varausnumero: {varausnumero}")
+    print(f"Varaaja: {varaaja}")
+    print(f"Päivämäärä: {suomalainenPaiva}")
+    print(f"Aloitusaika: {suomalainenAika}")
+    print(f"Tuntimäärä: {tuntimaara}")
+    print(f"Tuntihinta: {tuntihinta} €")
+    print(f"Maksettu: {'kyllä' if maksettu else 'ei'}")
+    print(f"Kohde: {kohde}")
+    print(f"Puhelin: {puhelin}")
+    print(f"Sähköposti: {sahkoposti}")
 
 if __name__ == "__main__":
     main()
