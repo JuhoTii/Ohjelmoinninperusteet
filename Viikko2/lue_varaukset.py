@@ -19,30 +19,27 @@ Sähköposti: anna.virtanen@example.com
 
 from datetime import datetime
 
-
 def main():
     varaukset = "varaukset.txt"
 
     with open(varaukset, "r", encoding="utf-8") as f:
         varaus = f.read().strip().split('|')
 
-    # Muunnokset
+    # Muunnokset ja muuttujien alustukset
     varausnumero = int(varaus[0])
     varaaja = varaus[1]
-
-    # Päivämäärä ja aika
     paiva = datetime.strptime(varaus[2], "%Y-%m-%d").date()
-    suomalainenPaiva = paiva.strftime("%d.%m.%Y")
-
     aika = datetime.strptime(varaus[3], "%H:%M").time()
-    suomalainenAika = aika.strftime("%H.%M")
-
     tuntimaara = int(varaus[4])
     tuntihinta = float(varaus[5])
     maksettu = varaus[6].lower() == "true"
     kohde = varaus[7]
     puhelin = int(varaus[8])
     sahkoposti = varaus[9]
+
+    # Muotoillut arvot
+    suomalainenPaiva = paiva.strftime("%d.%m.%Y")
+    suomalainenAika = aika.strftime("%H.%M")
 
     # Tulostus
     print(f"Varausnumero: {varausnumero}")
@@ -55,7 +52,6 @@ def main():
     print(f"Kohde: {kohde}")
     print(f"Puhelin: {puhelin}")
     print(f"Sähköposti: {sahkoposti}")
-
 
 if __name__ == "__main__":
     main()
