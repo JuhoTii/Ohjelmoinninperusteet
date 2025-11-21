@@ -1,7 +1,7 @@
 from datetime import datetime
 
-
 def muunna_varaustiedot(varaus: list) -> list:
+    """Muuta varauksen tietotyypit sopiviksi."""
     # Tähän tulee siis varaus oletustietotyypeillä (str)
     # Varauksessa on 11 saraketta -> Lista -> Alkiot 0-10
     # Muuta tietotyypit haluamallasi tavalla -> Seuraavassa esimerkki ensimmäisestä alkioista
@@ -22,6 +22,7 @@ def muunna_varaustiedot(varaus: list) -> list:
 
 
 def hae_varaukset(varaustiedosto: str) -> list:
+    """Hae varaukset tiedostosta ja palauta ne listana, jossa on oikeat tietotyypit."""
     # HUOM! Tälle funktioille ei tarvitse tehdä mitään!
     # Jos muutat, kommentoi miksi muutit
     varaukset = []
@@ -36,6 +37,7 @@ def hae_varaukset(varaustiedosto: str) -> list:
 
 
 def main():
+    """Pääohjelma, jossa käsitellään varauksia."""
     # HUOM! seuraaville riveille ei tarvitse tehdä mitään osassa A!
     # Osa B vaatii muutoksia -> Esim. tulostuksien (print-funktio) muuttamisen.
     # Kutsutaan funkioita hae_varaukset, joka palauttaa kaikki varaukset oikeilla tietotyypeillä
@@ -63,12 +65,11 @@ def main():
 
     print("3) Varausten vahvistus status:")
     for status in varaukset[1:]:
-        if status[8] == True:
+        if status[8]:
             vahstatus = "Vahvistettu"
         else:
             vahstatus = "Ei vahvistettu"
         nimi = status[1]
-        vahvistettu = status[8]
         print(f"- {nimi}-> {vahstatus}")
     print("------------------------------------------------------")
 
@@ -85,7 +86,6 @@ def main():
     muutettu_kokonaistulot = f"{kokonaistulot:.2f}".replace('.', ',')
     print(
         f"- Vahvistettujen varausten kokonaistulot: {muutettu_kokonaistulot} euroa")
-    
     print("------------------------------------------------------")
 
 
