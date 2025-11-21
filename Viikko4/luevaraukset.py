@@ -28,17 +28,16 @@ def muunna_varaustiedot(varaus: list) -> list:
     muutettu_varaus = []
     # Ensimmäisen alkion = varaus[0] muunnos
     muutettu_varaus.append(int(varaus[0]))
-    # Ja tästä jatkuu
-    muutettu_varaus.append("")
-    muutettu_varaus.append("")
-    muutettu_varaus.append("")
-    muutettu_varaus.append("")
-    muutettu_varaus.append("")
-    muutettu_varaus.append("")
-    muutettu_varaus.append("")
-    muutettu_varaus.append("")
-    muutettu_varaus.append("")
-    muutettu_varaus.append("")
+    muutettu_varaus.append(str(varaus[1]))
+    muutettu_varaus.append(str(varaus[2]))
+    muutettu_varaus.append(str(varaus[3]))
+    muutettu_varaus.append(datetime.strptime(varaus[4], "%Y-%m-%d").date())
+    muutettu_varaus.append(datetime.strptime(varaus[5], "%H:%M").time())
+    muutettu_varaus.append(int(varaus[6]))
+    muutettu_varaus.append(float(varaus[7]))
+    muutettu_varaus.append(varaus[8].strip().lower() == "true")
+    muutettu_varaus.append(str(varaus[9]))
+    muutettu_varaus.append(datetime.strptime(varaus[10], "%Y-%m-%d %H:%M:%S"))
     return muutettu_varaus
 
 def hae_varaukset(varaustiedosto: str) -> list:
@@ -58,13 +57,15 @@ def main():
     # Osa B vaatii muutoksia -> Esim. tulostuksien (print-funktio) muuttamisen.
     # Kutsutaan funkioita hae_varaukset, joka palauttaa kaikki varaukset oikeilla tietotyypeillä
     varaukset = hae_varaukset("varaukset.txt")
-    print(" | ".join(varaukset[0]))
-    print("------------------------------------------------------------------------")
-    for varaus in varaukset[1:]:
-        print(" | ".join(str(x) for x in varaus))
-        tietotyypit = [type(x).__name__ for x in varaus]
-        print(" | ".join(tietotyypit))
-        print("------------------------------------------------------------------------")
+    print("1) Vahvistetut varaukset")
+    for vahvaraus in varaukset[1:]:
+        if vahvaraus[8]:  # Vain vahvistetut varaukset
+            nimi = vahvaraus[1]
+            tila = vahvaraus[9]
+            pvm = vahvaraus[4].strftime("%d.%m.%Y")
+            klo = vahvaraus[5].strftime("%H.%M")
+            print(f"- {nimi}, {tila}, {pvm} klo {klo}")
+
 
 if __name__ == "__main__":
     main()
