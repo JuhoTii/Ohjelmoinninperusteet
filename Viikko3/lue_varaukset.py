@@ -21,7 +21,27 @@ from datetime import datetime
 
 def hae_varaaja(varaus):
     nimi = varaus[1]
+    varausnumero = varaus[0]
+    paivamaara = varaus[2]
+    aloitusaika = varaus[3]
+    tuntimaara = varaus[4]
+    tuntihinta = float(varaus[5])
+    kokonaishinta = float(tuntihinta) * int(tuntimaara)
+    maksettu = varaus[6].strip().lower() == "true" and "Kyllä" or "Ei"
+    kohde = varaus[7]
+    puhelin = varaus[8]
+    sahkoposti = varaus[9]
+    print(f"Varausnumero: {varausnumero}")
     print(f"Varaaja: {nimi}")
+    print(f"Päivämäärä: {paivamaara}")
+    print(f"Aloitusaika: {aloitusaika}")
+    print(f"Tuntimäärä: {tuntimaara}")
+    print(f"Tuntihinta: {tuntihinta:.2f}€")
+    print(f"Kokonaishinta: {kokonaishinta:.2f}€")
+    print(f"Maksettu: {maksettu}")
+    print(f"Kohde: {kohde}")
+    print(f"Puhelin: {puhelin}")
+    print(f"Sähköposti: {sahkoposti}")
 
 
 def main():
