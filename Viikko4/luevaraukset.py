@@ -65,7 +65,17 @@ def main():
             pvm = vahvaraus[4].strftime("%d.%m.%Y")
             klo = vahvaraus[5].strftime("%H.%M")
             print(f"- {nimi}, {tila}, {pvm} klo {klo}")
-
-
+    print("------------------------------------------------------")
+    print("2) Pitkät varaukset(kesto vähintään 3 tuntia  )")
+    for pitvaraus in varaukset[1:]:
+        if pitvaraus[6] >= 3:  
+            nimi = pitvaraus[1]
+            pvm = pitvaraus[4].strftime("%d.%m.%Y")
+            kelloaika = pitvaraus[5].strftime("%H.%M")
+            kesto = pitvaraus[6]
+            tila = pitvaraus[9]
+            print(f"- {nimi}, Päivämäärä: {pvm} , kellonaika: {kelloaika} , kesto: {kesto} tuntia, tila: {tila}")
+    print("------------------------------------------------------")
+    print("3) Varausten vahvistusstatus  )")
 if __name__ == "__main__":
     main()
