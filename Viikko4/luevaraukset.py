@@ -76,7 +76,8 @@ def main():
             tila = pitvaraus[9]
             print(f"- {nimi}, Päivämäärä: {pvm} , kellonaika: {kelloaika} , kesto: {kesto} tuntia, tila: {tila}")
     print("------------------------------------------------------")
-    print("3) Varausten vahvistusstatus")
+    
+    print("3) Varausten vahvistus status:")
     for status in varaukset[1:]:
         if status[8] == True:
             vahstatus = "Vahvistettu"
@@ -84,6 +85,16 @@ def main():
             vahstatus = "Ei vahvistettu"
         nimi = status[1]
         vahvistettu = status[8]
-        print(f"- {nimi}, {vahstatus}")
+        print(f"- {nimi}-> {vahstatus}")
+    print("------------------------------------------------------")
+
+    print("3) Yhteenveto vahvistuksista:")
+    vahvistetut_maara = sum(1 for varaus in varaukset[1:] if varaus[8])
+    eivahvistetut_maara = sum(1 for varaus in varaukset[1:] if not varaus[8])
+    print(f"- Vahvistettuja varauksia: {vahvistetut_maara}")
+    print(f"- Ei vahvistettuja varauksia: {eivahvistetut_maara}")
+    
+    print("------------------------------------------------------")
+
 if __name__ == "__main__":
     main()
