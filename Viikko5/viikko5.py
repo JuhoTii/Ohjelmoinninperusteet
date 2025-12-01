@@ -34,15 +34,17 @@ def muunna_data(rivit: list[dict]) -> dict:
     return paivat
 
 
-def tulosta_raportti(paivat: dict, otsikko: str) -> None:
-    
+def tulosta_raportti(paivat: dict ) -> None:
+    otsikko = "Viikon 42 sähkönkulutus ja -tuotanto (kWh, vaiheittain)"
     RED = "\033[31m"    # punainen
     GREEN = "\033[32m"  # vihreä
     RESET = "\033[0m"   # palauttaa normaalin värin
+    BLUE = "\033[34m"
+    YELLOW = "\033[33m"
 
-    print(otsikko)
+    print(f"{BLUE}{otsikko}{RESET}")
     print()
-    print(f"{'Päivä':<12} {'Pvm':<20} {RED}Kulutus [kWh]{RESET:<30} {GREEN}Tuotanto [kWh]{RESET:<20}")
+    print(f"{YELLOW}{'Päivä':<13}{'Pvm':<20}{RESET}{RED}{'Kulutus [kWh]':<30}{RESET}{GREEN}{'Tuotanto [kWh]':<20}{RESET}")
     print(f"{'':<12} {'(pv.kk.vvvv)':<12} {'v1':>8} {'v2':>8} {'v3':>8} {'':>4} {'v1':>8} {'v2':>8} {'v3':>8}")
     print("-" * 85)
 
@@ -58,7 +60,6 @@ def main() -> None:
     tiedosto = 'viikko5.csv'
     data = lue_csv(tiedosto)
     paivat = muunna_data(data)
-    tulosta_raportti(paivat, "Viikon 42 sähkönkulutus ja -tuotanto (kWh, vaiheittain)")
-
+    tulosta_raportti(paivat,)
 if __name__ == "__main__":
     main()
