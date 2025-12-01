@@ -35,11 +35,16 @@ def muunna_data(rivit: list[dict]) -> dict:
 
 
 def tulosta_raportti(paivat: dict, otsikko: str) -> None:
+    
+    RED = "\033[31m"    # punainen
+    GREEN = "\033[32m"  # vihreä
+    RESET = "\033[0m"   # palauttaa normaalin värin
+
     print(otsikko)
     print()
-    print(f"{'Päivä':<12} {'Pvm':<12} {'Kulutus [kWh]':<30} {'Tuotanto [kWh]':<20}")
+    print(f"{'Päivä':<12} {'Pvm':<20} {RED}Kulutus [kWh]{RESET:<30} {GREEN}Tuotanto [kWh]{RESET:<20}")
     print(f"{'':<12} {'(pv.kk.vvvv)':<12} {'v1':>8} {'v2':>8} {'v3':>8} {'':>4} {'v1':>8} {'v2':>8} {'v3':>8}")
-    print("-" * 75)
+    print("-" * 85)
 
     for (paiva, pvm), arvot in paivat.items():
         kulutus = [f"{x:.2f}".replace('.', ',') for x in arvot[:3]]
