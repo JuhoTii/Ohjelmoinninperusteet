@@ -6,18 +6,22 @@ import csv
 from datetime import datetime
 from collections import defaultdict
 
+
 def lue_csv(tiedosto: str) -> list[dict]:
     """Lukee CSV-tiedoston ja palauttaa rivit sanakirjoina."""
     with open(tiedosto, newline='', encoding='utf-8') as f:
         return list(csv.DictReader(f, delimiter=';'))
 
+
 def muunna_data(rivit: list[dict]) -> dict:
     """Sanakirja ryhmittelee datan päivittäin ja laskee summat (Wh -> kWh)."""
-    paivat = defaultdict(lambda: [0, 0, 0, 0, 0, 0])  # kulutus v1,v2,v3, tuotanto v1,v2,v3
+    paivat = defaultdict(lambda: [0, 0, 0, 0, 0, 0]
+                         )  # kulutus v1,v2,v3, tuotanto v1,v2,v3
     for rivi in rivit:
         aika = datetime.fromisoformat(rivi['Aika'])
         pvm_str = aika.strftime('%d.%m.%Y')
-        key = (aika.strftime('%A'), pvm_str)  # esim. ('maanantai', '13.10.2025')
+        # esim. ('maanantai', '13.10.2025')
+        key = (aika.strftime('%A'), pvm_str)
 
         # Lisää kulutus ja tuotanto (muunna int ja jaa 1000)
         paivat[key][0] += int(rivi['Kulutus vaihe 1 Wh'])
@@ -34,7 +38,7 @@ def muunna_data(rivit: list[dict]) -> dict:
     return paivat
 
 
-def tulosta_raportti(paivat: dict ) -> None:
+def tulosta_raportti(paivat: dict) -> None:
     otsikko = "Viikon 42 sähkönkulutus ja -tuotanto (kWh, vaiheittain)"
     RED = "\033[31m"    # punainen
     GREEN = "\033[32m"  # vihreä
@@ -44,7 +48,8 @@ def tulosta_raportti(paivat: dict ) -> None:
 
     print(f"{BLUE}{otsikko}{RESET}")
     print()
-    print(f"{YELLOW}{'Päivä':<13}{'Pvm':<20}{RESET}{RED}{'Kulutus [kWh]':<30}{RESET}{GREEN}{'Tuotanto [kWh]':<20}{RESET}")
+    print(
+        f"{YELLOW}{'Päivä':<13}{'Pvm':<20}{RESET}{RED}{'Kulutus [kWh]':<30}{RESET}{GREEN}{'Tuotanto [kWh]':<20}{RESET}")
     print(f"{'':<12} {'(pv.kk.vvvv)':<12} {'v1':>8} {'v2':>8} {'v3':>8} {'':>4} {'v1':>8} {'v2':>8} {'v3':>8}")
     print("-" * 85)
 
@@ -61,5 +66,7 @@ def main() -> None:
     data = lue_csv(tiedosto)
     paivat = muunna_data(data)
     tulosta_raportti(paivat,)
+
+
 if __name__ == "__main__":
     main()
