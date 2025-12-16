@@ -1,5 +1,5 @@
 
-
+"""CSV-lukufunktiot sähkönkäyttö- ja tuotantodatalle."""
 import csv
 from typing import List, Dict
 
@@ -17,3 +17,5 @@ def lue_csvt(tiedostot: List[str]) -> List[Dict[str, str]]:
             yhdistetty.extend(rivit)
         except FileNotFoundError:
             print(f"VAROITUS: '{nimi}' ei löytynyt – ohitetaan.")
+
+    return yhdistetty
