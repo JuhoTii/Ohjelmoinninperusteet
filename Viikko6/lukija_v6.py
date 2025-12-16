@@ -47,7 +47,7 @@ def _normalize_key(k: str) -> str:
     if s in aliases:
         return aliases[s]
 
-    # Heuristiikka pienten vaihtelujen varalle
+
     if "kulutus" in s:
         return "kulutus"
     if "tuotanto" in s:

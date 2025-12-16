@@ -13,13 +13,22 @@ from raportti_v6 import raportti_paivavalilta, raportti_kuukausi, raportti_vuosi
 from kirjaaja_v6 import tallenna_raportti
 
 
-def _kysy_pvm(teksti: str) -> date:
-    """Kysyy päivämäärän muodossa pv.kk.vvvv ja palauttaa date."""
+def _kysy_pvm(teksti: str, allowed_year: int | None = 2025) -> date:
+    """Kysyy päivämäärän muodossa pv.kk.vvvv ja palauttaa date.
+    Jos allowed_year on asetettu (esim. 2025), vuosi pakotetaan siihen.
+    """
     while True:
         s = input(teksti).strip()
         try:
             dt = datetime.strptime(s, "%d.%m.%Y")
-            return dt.date()
+            d = dt.date()
+            if allowed_year is not None and d.year != allowed_year:
+                print(
+                    f"Päivämäärän tulee olla vuodelta {allowed_year}. "
+                    f"Anna arvo muodossa pv.kk.vvvv (esim. 13.10.{allowed_year})."
+                )
+                continue  # palaa kysymään ALKUpäivää uudelleen
+            return d
         except ValueError:
             print("Virheellinen muoto. Esimerkki: 13.10.2025")
 
@@ -84,8 +93,8 @@ def main() -> None:
     while True:
         valinta = _valikko()
         if valinta == 1:
-            alku = _kysy_pvm("Alkupäivä (pv.kk.vvvv): ")
-            loppu = _kysy_pvm("Loppupäivä (pv.kk.vvvv): ")
+            alku = _kysy_pvm("Alkupäivä (pv.kk.vvvv): ", allowed_year=2025)
+            loppu = _kysy_pvm("Loppupäivä (pv.kk.vvvv): ", allowed_year=2025)
             raportti = raportti_paivavalilta(paivat, alku, loppu)
         elif valinta == 2:
             kk = _kysy_kk()
