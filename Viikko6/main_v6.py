@@ -2,7 +2,7 @@
 # Copyright (c) 2025 Juho Tiihonen
 # License: MIT
 
-"""Pääohjelma (Viikko6): lukee 2025.csv ja tarjoaa interaktiivisen valikon."""
+"""Pääohjelma (Viikko6): lukee 2025.csv antaa käyttöliittymän."""
 
 from datetime import datetime, date
 from typing import List
@@ -92,3 +92,16 @@ def main() -> None:
             raportti = raportti_kuukausi(kkdata, kk)
         elif valinta == 3:
             raportti = raportti_vuosi(vdata)
+        elif valinta == 4:
+            print("Lopetetaan ohjelma.")
+            break
+
+        for r in raportti:
+            print(r)
+
+            if not _jatkovalikko(raportti):
+                break
+
+
+if __name__ == "__main__":
+    main()
