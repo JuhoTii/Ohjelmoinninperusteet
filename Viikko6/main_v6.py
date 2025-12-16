@@ -95,6 +95,10 @@ def main() -> None:
         if valinta == 1:
             alku = _kysy_pvm("Alkupäivä (pv.kk.vvvv): ", allowed_year=2025)
             loppu = _kysy_pvm("Loppupäivä (pv.kk.vvvv): ", allowed_year=2025)
+            if loppu < alku:
+                print("Päättymispäivä ei voi olla ennen aloituspäivää. Syötä tiedot uudelleen. \n")
+                continue
+            
             raportti = raportti_paivavalilta(paivat, alku, loppu)
         elif valinta == 2:
             kk = _kysy_kk()
