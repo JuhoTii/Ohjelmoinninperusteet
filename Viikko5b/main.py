@@ -5,7 +5,7 @@
 """Pääohjelma, joka käyttää muita moduuleja CSV-tiedostojen lukemiseen,"""
 
 from luefunktio import lue_csvt
-from muunnafunktio import muunna_data, muodosta_raporttirivit
+from muunnafunktio import muunna_data, muodosta_viikkoraporttirivit
 from kirjoitafunktio import kirjoita_raportti
 
 
@@ -15,7 +15,7 @@ def main() -> None:
 
     datat = lue_csvt(tiedostot)
     paivat = muunna_data(datat)
-    rivit = muodosta_raporttirivit(paivat)
+    rivit = muodosta_viikkoraporttirivit(paivat)
     kirjoita_raportti(rivit, "raportti.txt")
     print("Valmis: raportti.txt luotu.")
 
