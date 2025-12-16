@@ -6,7 +6,7 @@
 
 from datetime import datetime, date
 from typing import List
-
+import sys
 from lukija_v6 import lataa_vuosi
 from laskenta_v6 import muodosta_paivat, muodosta_kuukaudet, muodosta_vuosi
 from raportti_v6 import raportti_paivavalilta, raportti_kuukausi, raportti_vuosi
@@ -56,7 +56,7 @@ def _jatkovalikko(rivit: List[str]) -> bool:
     Palauttaa True jos halutaan jatkaa, False jos lopetetaan."""
     print("\nMitä haluat tehdä seuraavaksi?")
     print("1) Kirjoita raportti tiedostoon raportti.txt")
-    print("2) Luo uusi raportti")
+    print("2) Palaa päävalikkoon")
     print("3) Lopeta")
     while True:
         s = input("Valinta (1–3): ").strip()
@@ -65,9 +65,9 @@ def _jatkovalikko(rivit: List[str]) -> bool:
             print("Raportti kirjoitettu: raportti.txt")
             return True  # palataan uuteen raporttiin
         elif s == "2":
-            return True
-        elif s == "3":
             return False
+        elif s == "3":
+            raise SystemExit("Ohjelma lopetettu käyttäjän toimesta.")
         else:
             print("Anna arvo 1–3.")
 
