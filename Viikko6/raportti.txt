@@ -1,6 +1,6 @@
-Kuukausiyhteenveto: 5/2025
+Kuukausiyhteenveto: 2/2025
 --------------------------
-Kokonaiskulutus:   306,64 kWh
-Kokonaistuotanto:  451,98 kWh
-Nettokuorma:       -145,34 kWh
-Keskilämpötila:    9,62 °C
+Kokonaiskulutus:   1364,95 kWh
+Kokonaistuotanto:  7,11 kWh
+Nettokuorma:       1357,84 kWh
+Keskilämpötila:    -3,05 °C
